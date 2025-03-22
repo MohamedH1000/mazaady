@@ -5,15 +5,16 @@ import React from "react";
 import { Navlinks } from "../../../constants/constants";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CirclePlus } from "lucide-react";
+import { AlignJustify, CirclePlus } from "lucide-react";
 
 const NavBar = () => {
   const pathname = usePathname();
 
   return (
     <div className="w-full h-[68px] px-[100px] flex items-center justify-between">
-      <div className="flex items-center justify-center gap-10">
+      <div className="flex items-center justify-center gap-10 max-md:gap-2">
         {/* Logo */}
+        <AlignJustify className="max-md:block hidden" />
         <Image
           src={"/assets/Logo.png"}
           alt="Logo"
@@ -22,7 +23,7 @@ const NavBar = () => {
           className="cursor-pointer"
         />
         {/* Links */}
-        <div className="flex items-center justify-center gap-10 font-medium">
+        <div className="flex items-center justify-center gap-10 font-medium max-md:hidden">
           {Navlinks.map((link, i) => {
             const isActive = pathname === link.href; // Check if the link is active
             return (
@@ -84,13 +85,13 @@ const NavBar = () => {
           <button
             className="flex items-center justify-center gap-2 cursor-pointer w-[172px] h-[40px] 
           text-white bg-gradient-to-r from-[#D20653] to-[#FF951D] rounded-lg 
-          hover:from-[#B00547] hover:to-[#E0841A] transition duration-300 text-sm"
+          hover:from-[#B00547] hover:to-[#E0841A] transition duration-300 text-sm max-md:hidden"
           >
             <CirclePlus className="w-5 h-5" />
             Add New Product
           </button>
         </div>
-        <div className="flex items-center justify-center gap-5">
+        <div className="flex items-center justify-center gap-5 max-md:hidden">
           <Image
             src={"/assets/international.svg"}
             alt="international"
