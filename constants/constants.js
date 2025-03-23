@@ -4,6 +4,10 @@ export const Navlinks = [
     label: "Home",
   },
   {
+    href: "/form",
+    label: "Form",
+  },
+  {
     href: "/blog",
     label: "Blog",
   },
