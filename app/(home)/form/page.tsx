@@ -11,12 +11,8 @@ interface Category {
 interface Subcategory {
   id: number;
   name: string;
-  properties: Property[];
-}
-
-interface Property {
-  id: number;
-  name: string;
+  type: string;
+  parent_id: number | null;
   options: Option[];
 }
 
@@ -24,6 +20,12 @@ interface Option {
   id: number;
   name: string;
   properties?: Property[]; // Nested properties inside options
+}
+
+interface Property {
+  id: number;
+  name: string;
+  options: Option[];
 }
 
 // Fetch main categories
@@ -117,7 +119,20 @@ const Page = () => {
     const subcategoryId = parseInt(e.target.value);
     setSelectedSubcategory(subcategoryId);
     const subcategory = subcategories.find((sub) => sub.id === subcategoryId);
-    setProperties(subcategory?.properties || []);
+
+    // If the subcategory has options, treat them as properties
+    if (subcategory?.options) {
+      setProperties(
+        subcategory.options.map((option) => ({
+          id: option.id,
+          name: option.name,
+          options: option.properties || [], // Use nested properties if available
+        }))
+      );
+    } else {
+      setProperties([]);
+    }
+
     setSelectedProperties({});
   };
 
